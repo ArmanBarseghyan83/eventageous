@@ -19,6 +19,9 @@ Event.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    bufferData: {
+      type: DataTypes.BLOB,
+    }
   },
   {
     sequelize,
