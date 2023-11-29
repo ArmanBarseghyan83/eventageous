@@ -24,26 +24,26 @@
 </form> --}}
 
 <div>
-  <div>
+  <div class="card">
     <form action="/api/events" enctype="multipart/form-data" method="post">
 
       <div>
-        <div>Image</div>
-        <input type="file" name="image">
+        <div class="lead">Image</div>
+        <input class="form-control form-control-lg" id="formFileLg" type="file" name="image" >
       </div>
 
       <div>
-        <div>Title</div>
-        <input type="text">
+        <div class="lead">Title</div>
+        <input class="form-control" type="text">
       </div>
 
       <div>
-        <div>Description</div>
-        <textarea id="event-description" name="description"></textarea>
+        <div class="lead">Description</div>
+        <textarea class="form-control mb-3" id="event-description" name="description" rows="5"></textarea>
       </div>
 
-      <div>
-        <input type="submit">
+      <div >
+        <input type="submit" class="btn btn-primary">
       </div>
 
     </form>
