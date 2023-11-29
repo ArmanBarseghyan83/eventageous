@@ -1,0 +1,25 @@
+
+nav {
+    padding: 20px;
+    
+}
+
+#login-btn {
+    border-radius: 8px;
+}
+
+#body {
+    display: flex;
+    justify-content: center;
+}
+
+#homepage {
+    margin: 50px;
+}
+
+.event-card {
+    padding: 20px ; 
+    border-color: rgb(0, 162, 255);
+    border: 15px;
+    box-shadow: 25px;
+}
