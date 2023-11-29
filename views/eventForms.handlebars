@@ -1,0 +1,13 @@
+<form action="/api/events" enctype="multipart/form-data" method="post">
+  <div class="form-group">
+    {{#if isNewEvent}}
+    <input type="file" class="form-control-file" name="uploaded_file">
+    {{/if}}
+    <input type="text" class="form-control" placeholder="Add Event Name" name="EventName" value="{{EventName}}">
+    <input type="datetime-local" class="form-control-date" name="EventDate" value="{{EventDate}}">
+    <input type="text" class="form-control-location" placeholder="Add Event Location" name="EventLocation" value="{{EventLocation}}">
+    <textarea class="form-control-details" placeholder="Add Event Details" name="EventDetail" value="{{EventDetails}}" rows="10"></textarea>
+    <input type="submit" value="Create My Event!" class="btn btn-default"> 
+
+  </div>
+</form>

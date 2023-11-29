@@ -15,7 +15,7 @@ Event.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    content: {
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
