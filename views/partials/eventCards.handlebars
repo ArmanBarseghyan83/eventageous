@@ -1,12 +1,13 @@
-<a class="event-card col-sm-6 col-md-4" href=""><section>
-        <img class="card-img-top" src="https://image-placeholder.com/images/actual-size/200x200.png" alt="">
+<a class="event-card col-sm-6 col-md-4" href="/events/{{id}}">
+    <section>
+        <img class="card-img-top" src="{{imageSrc}}" alt="">
         <div class="card-body">
-            <h2 class="card-title">Event Title</h2>
+            <h2 class="card-title">{{title}}</h2>
             <div class="card-text">
-            <h3>Created by: Example User</h3>
-            <h4>Description:</h4>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto enim nam beatae alias, neque aspernatur
-                tempore cum delectus placeat consectetur voluptatum magni vero quas quae modi numquam excepturi.
-                Debitis, laborum!</p></div>
+                <h3>Created by: {{user.username}}</h3>
+                <h4>Description:</h4>
+                <p>{{description}}</p>
+            </div>
         </div>
-</section></a>
+    </section>
+</a>

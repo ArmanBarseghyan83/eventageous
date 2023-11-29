@@ -1,24 +1,39 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Get comment section and hide it initially
-    var commentSection = document.querySelector(".comment-section");
-    commentSection.style.display = "none";
-  
-    // Get the "Add a Comment" button and attach a click event listener
-    var addCommentButton = document.querySelector(".event-container h3");
-    addCommentButton.addEventListener("click", function () {
-      // Toggle the visibility of the comment section
-      if (commentSection.style.display === "none") {
-        commentSection.style.display = "block";
+const addComment = document.querySelector('.comments-content button');
+const commentsContent = document.querySelector('.comments-content');
+const commentformWrapper = document.querySelector('.comment-form-wrapper');
+const submitComment = document.querySelector('.comment-form button');
+const commentContent = document.querySelector('.comment-form textarea');
+
+//Get the data from the user input and fetch the backend api for creating a new comment.
+const addCommentHundler = async (e) => {
+  e.preventDefault();
+  const content = commentContent.value.trim();
+  const eventId = submitComment.dataset.eventid;
+  console.log(eventId, content);
+  if (content) {
+    try {
+      const response = await fetch('/api/comments', {
+        method: 'POST',
+        body: JSON.stringify({ content, eventId }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.ok) {
+        document.location.reload();
       } else {
-        commentSection.style.display = "none";
+        alert('Failed to comment.');
       }
-    });
-  
-    // Prevent the default form submission behavior
-    var commentForm = document.getElementById("comment-form");
-    commentForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-      commentSection.style.display = "none";
-    });
-  });
-  
+    } catch (e) {
+      alert('Failed to comment.');
+    }
+  } else {
+    alert('Fill out the form.');
+  }
+};
+
+addComment.addEventListener('click', () => {
+  commentsContent.classList.add('hide');
+  commentformWrapper.classList.remove('hide');
+});
+
+submitComment.addEventListener('click', addCommentHundler);

@@ -1,5 +1,7 @@
-<section id="homepage">
-    <div class="row">{{> eventCards}}</div>
-
-    <img src="{{imageSrc}}" alt="">
+<section>
+    <div class="row">
+        {{#each events}}
+        {{> eventCards}}
+        {{/each}}
+    </div>
 </section>
