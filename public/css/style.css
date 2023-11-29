@@ -19,7 +19,7 @@ nav {
 
 .event-card {
     padding: 20px ; 
-    border-color: rgb(0, 162, 255);
-    border: 15px;
-    box-shadow: 25px;
+    border: 15px solid rgb(0, 162, 255) ;
+    border-radius: 25px;
+    box-shadow: 5px 5px;
 }
