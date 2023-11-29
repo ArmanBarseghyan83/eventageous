@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Details</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+
+<!-- Navigation Bar -->
+<nav>
+    <!-- Your navigation bar content goes here -->
+</nav>
+
+<!-- Event Content -->
+<div class="event-container">
+    <!-- Event Image -->
+    <div class="event-image">
+        <img src="{{ event.image }}" alt="{{ event.name }} Image">
+    </div>
+
+    <!-- Event Map -->
+    <div class="event-map">
+        <!-- You can embed a map using an iframe or another method here -->
+        <p>Map goes here</p>
+    </div>
+
+    <!-- Event Name -->
+    <h2>{{ event.name }}</h2>
+
+    <!-- Event Details Table -->
+    <table>
+        <tr>
+            <td><strong>Location:</strong></td>
+            <td>{{ event.location }}</td>
+        </tr>
+        <tr>
+            <td><strong>Size:</strong></td>
+            <td>{{ event.size }}</td>
+        </tr>
+        <tr>
+            <td><strong>Capacity:</strong></td>
+            <td>{{ event.capacity }}</td>
+        </tr>
+        <tr>
+            <td><strong>Tickets Available:</strong></td>
+            <td>{{ event.ticketsAvailable }}</td>
+        </tr>
+        <tr>
+            <td><strong>Open to Book:</strong></td>
+            <td>{{ event.openToBook }}</td>
+        </tr>
+        <!-- Add more details as needed -->
+    </table>
+
+    <!-- Comment Section -->
+    <div class="comment-section">
+        <h3>Add a Comment</h3>
+        <form id="comment-form">
+            <label for="comment-title">Title:</label>
+            <input type="text" id="comment-title" name="commentTitle" required>
+
+            <label for="comment-text">Comment:</label>
+            <textarea id="comment-text" name="commentText" rows="4" required></textarea>
+
+            <button type="submit">Submit Comment</button>
+        </form>
+    </div>
+</div>
+
+<!-- Your JavaScript and Handlebars library -->
+<!-- Make sure to include Handlebars library before your custom scripts -->
+<script src="path/to/handlebars.js"></script>
+<script>
+    // Your JavaScript logic for handling data and rendering with Handlebars goes here
+</script>
+
+</body>
+</html>
