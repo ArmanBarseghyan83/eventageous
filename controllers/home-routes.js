@@ -3,7 +3,7 @@ const withAuth = require('../utils/auth.js');
 
 // GET all events for homepage
 router.get('/', async (req, res) => {
-  
+
     res.render('homepage', {
       loggedIn: req.session.currentUser?.loggedIn,
     });
