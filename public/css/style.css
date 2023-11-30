@@ -23,3 +23,7 @@ nav {
     border-radius: 25px;
     box-shadow: 5px 5px;
 }
+
+.hide {
+    display: none;
+}
