@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth.js');
-const { Event, Comment, User } = require('../models');
+const { Event, Comment, User, Guest } = require('../models');
 const sharp = require('sharp');
 
 // GET all events for homepage
@@ -46,6 +46,7 @@ router.get('/events/:id', async (req, res) => {
           model: Comment,
           include: [{ model: User }],
         },
+        { model: User, as: 'eventGuests' },
       ],
     });
     if (!eventData) {
@@ -119,7 +120,6 @@ router.get('/dashboard/create', async (req, res) => {
 
 // Update event page
 router.get('/dashboard/update/:id', async (req, res) => {
-  
   try {
     const eventData = await Event.findByPk(req.params.id);
     if (!eventData) {
