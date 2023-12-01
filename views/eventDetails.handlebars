@@ -1,10 +1,9 @@
 <section class="card">
-    {{!-- <img class="card-img-top" src="https://image-placeholder.com/images/actual-size/200x200.png" alt=""> --}}
     <img src="{{imageSrc}}" alt="">
     <div class="card-body">
         <h1 class="card-title">{{title}}</h1>
         <div class="card-text">
-            <h3>Created by: {{user.username}}</h3>
+            <h3>Created by: {{username}}</h3>
             <h4>Description:</h4>
             <p>{{description}}</p>
         </div>
@@ -15,8 +14,8 @@
             <div class="comments-content">
                 <article>
                     {{#each comments}}
-                    <h4>- {{capitalize this.user.username}}, {{format_date this.createdAt}}</h4>
-                    <p>{{this.content}}</p>
+                    <h4>- {{capitalize user.username}}, {{format_date createdAt}}</h4>
+                    <p>{{content}}</p>
                     {{/each}}
                 </article>
                 <button>Add Comment</button>
@@ -28,7 +27,7 @@
                     </div>
                     <div>
                         {{#if loggedIn}}
-                        <button data-eventid="{{this.id}}">Submit</button>
+                        <button data-eventid="{{id}}">Submit</button>
                         {{else}}
                         <p>Please login first!</p>
                         <button type="button">Submit</button>
@@ -38,9 +37,33 @@
                 </form>
             </div>
         </div>
+    </div>
+</section>
+
+<section class="card">
+    <div class="card-body">
+        <h1 class="card-title">Guests</h1>
+        <div class="">
+            <form id="guest-form">
+                <input type="text" value="{{id}}" name="event_id" hidden>
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="card">
+
+            <div class="comments-content">
+                <article>
+                    {{#each eventGuests}}
+                    <h4>- {{capitalize username}}</h4>
+                    <hr>
+                    {{/each}}
+                </article>
+            </div>
+
+        </div>
 
     </div>
 
 </section>
 
-<script src="/js/comments.js"></script>
+<script src="/js/commentGuest.js"></script>
