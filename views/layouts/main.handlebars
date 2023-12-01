@@ -20,27 +20,32 @@
     <a href="/"><button class="login-btn btn btn-outline-info">Home</button></a>
 
     <div>
+      <a href="/dashboard"><button class="login-btn btn btn-outline-info">Dashboard</button></a>
       {{#if loggedIn}}
       <button class="login-btn btn btn-outline-info">Logout</button>
       {{else}}
       <a href="/login"><button class="login-btn btn btn-outline-info">Login</button></a>
       {{/if}}
     </div>
-
-        <a href="/"><button class="login-btn btn btn-outline-info">Dashboard</button></a>
-
         <a href="/dashboard/create"><button class="login-btn btn btn-outline-info">+ Add New Event</button></a>
 
 
   </nav>
+  <header>
+    {{#if idDashboard}}
+    <h1>Your Dashboard</h1>
+    {{else}}
+    <h1>All Events</h1>
+    {{/if}}
+  </header>
   <main>
     <section id="body">
       {{{body}}}
     </section>
   </main>
-  {{#if loggedIn}}
+
   <script src="/js/logout.js"></script>
-  {{/if}}
+ 
 </body>
 
 </html>

@@ -26,7 +26,7 @@ Event.init(
   {
     sequelize,
     freezeTableName: true,
-    underscored: true,
+    underscored: false,
     modelName: 'event',
   }
 );

@@ -1,58 +1,4 @@
-{{!-- <form action="/api/events" enctype="multipart/form-data" method="post">
-  <div class="form-group">
-    {{#if isNewEvent}}
-    <input type="file" class="form-control-file" name="uploaded_file">
-    {{/if}}
-    <input type="text" class="form-control" placeholder="Add Event Name" name="EventName" value="{{EventName}}">
-    <input type="datetime-local" class="form-control-date" name="EventDate" value="{{EventDate}}">
-    <input type="text" class="form-control-location" placeholder="Add Event Location" name="EventLocation"
-      value="{{EventLocation}}">
-    <textarea class="form-control-details" placeholder="Add Event Details" name="EventDetail" value="{{EventDetails}}"
-      rows="10"></textarea>
-    <input type="submit" value="Create My Event!" class="btn btn-default">
-
-  </div>
-</form> --}}
-
-{{!-- <form action="/api/events" enctype="multipart/form-data" method="post">
-  <div class="form-group">
-    <input type="file" name="image">
-    <input type="text" name="title">
-    <input type="text" name="desctiption">
-    <input type="submit">
-  </div>
-</form> --}}
-
-<div>
-  <div class="card">
-    <form action="/api/events" enctype="multipart/form-data" method="post">
-
-      <div>
-        <div class="lead">Image</div>
-        <input class="form-control form-control-lg" id="formFileLg" type="file" name="image" >
-      </div>
-
-      <div>
-        <div class="lead">Title</div>
-        <input class="form-control" type="text">
-      </div>
-
-      <div>
-        <div class="lead">Description</div>
-        <textarea class="form-control mb-3" id="event-description" name="description" rows="5"></textarea>
-      </div>
-
-      <div >
-        <input type="submit" class="btn btn-primary">
-      </div>
-
-    </form>
-  </div>
-</div>
-
-
-
-{{!-- <div>
+<div class="card">
   <header>
     {{#if isCreate}}
     <h2>Create New Event</h2>
@@ -61,31 +7,38 @@
     {{/if}}
   </header>
   <div>
+    {{#if isCreate}}
     <form action="/api/events" enctype="multipart/form-data" method="post">
       <div>
-        <div>Title</div>
-        <input type="text" id="event-title">
+        <div class="lead">Image</div>
+        <input type="file" name="image" required>
       </div>
-      <div>
-        <div>Description</div>
-        <textarea id="event-descripiton" name="description"></textarea>
-      </div>
-      <div>
-        <div>Image</div>
-        <input type="file" name="image">
-      </div>
-
-      <div>
-        {{#if isCreate}}
-        <button id="create-event">Create</button>
-        {{else}}
-        <button id="update-event">Update Event</button>
-        <button type="button" id="delete-event">Delete</button>
+      {{else}}
+      <form>
         {{/if}}
-      </div>
 
-    </form>
+        <div>
+          <div class="lead">Title</div>
+          <input type="text" id="event-title" name="title" value="{{title}}" required>
+        </div>
+
+        <div>
+          <div>Description</div>
+          <textarea class="form-control mb-3" rows="5" id="event-description" name="description" required>{{description}}</textarea>
+        </div>
+
+        <div>
+          {{#if isCreate}}
+          <button id="create-event">Create</button>
+          {{else}}
+          <button id="update-event" class="btn btn-primary">Update</button>
+          <button type="button" id="delete-event" class="btn btn-primary">Delete</button>
+          {{/if}}
+        </div>
+
+      </form>
   </div>
 </div>
 
-<script src="/js/event.js"></script> --}}
+
+<script src="/js/event.js"></script>

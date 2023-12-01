@@ -3,7 +3,7 @@ const { Event } = require('../../models');
 
 const sharp = require('sharp');
 
-const multer  = require('multer')
+const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
@@ -11,46 +11,52 @@ const upload = multer({ storage: storage });
 router.post('/', upload.single('image'), async (req, res) => {
   const file = req.file;
 
-  const eventBody = {
-    ...req.body
-  }
-
-  console.log(eventBody)
-
+  const eventBody = { ...req.body };
+  
   if (!file) {
     res.status(400).send('No file uploaded');
   } else {
     sharp(file.buffer)
       .resize(300)
       .toBuffer()
-      .then((resizedBuffer) => {
-        // save to the database
-        console.log(resizedBuffer);
-      });
-
-    // get from the database
-    sharp(file.buffer)
-      .resize(600)
-      .toBuffer()
-      .then((resizedBuffer) => {
-        const base64Image = resizedBuffer.toString('base64');
-        const imageSrc = `data:image/jpeg;base64,${base64Image}`;
-
-        res.render('homepage', { imageSrc });
+      .then(async (resizedBuffer) => {
+        try {
+          await Event.create({
+            ...eventBody,
+            userId: req.session.currentUser.userId,
+            bufferData: resizedBuffer,
+          });
+          res.status(200).redirect('/dashboard');
+        } catch (err) {
+          res.status(400).json(err.message);
+        }
       });
   }
 });
 
 // Update an event by its `id` value
 router.put('/:id', async (req, res) => {
-  
-    res.send('json/udated-event')
+  try {
+    const event = await Event.update(req.body, {
+      where: { id: req.params.id },
+    });
+    res.status(200).json(event);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
 // Delete an event by its `id` value
 router.delete('/:id', async (req, res) => {
 
-    res.send('json/deletd-event')
+  try {
+    const event = await Event.destroy({
+      where: { id: req.params.id },
+    });
+    res.status(200).json(event);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
 module.exports = router;

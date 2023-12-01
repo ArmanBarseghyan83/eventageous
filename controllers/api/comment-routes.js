@@ -1,16 +1,17 @@
 const router = require('express').Router();
 const { Event, Comment, User } = require('../../models');
 
-// Get all comments
-router.get('/', async (req, res) => {
-  
-    res.send('json/all-comments')
-});
-
 // Create a new comment
 router.post('/', async (req, res) => {
-  
-    res.send('json/new-comment')
+  try {
+    const comment = await Comment.create({
+      ...req.body,
+      userId: req.session.currentUser.userId,
+    });
+    res.status(200).json(comment);
+  } catch (err) {
+    res.status(400).json(err.message);
+  }
 });
 
 module.exports = router;

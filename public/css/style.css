@@ -1,4 +1,3 @@
-
 nav {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     /* padding: 50px; */
@@ -16,18 +15,23 @@ nav {
 
 #body {
     display: flex;
-    justify-content: center;    
+    justify-content: center;
     margin: 100px 80px;
 }
 
 .card {
     max-height: 500px;
     font-size: small;
-    padding: 20px ; 
-    border: 5px solid rgb(0, 162, 255) ;
+    padding: 20px;
+    border: 5px solid rgb(0, 162, 255);
     border-radius: 25px;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;}
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
 
-    img {
-        border-radius: 5px !important;
-    }
+img {
+    border-radius: 5px !important;
+}
+
+.hide {
+    display: none;
+}
