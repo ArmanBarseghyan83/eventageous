@@ -2,13 +2,14 @@
   const updateEventHandler = async (e) => {
     e.preventDefault();
     const title = document.querySelector('#event-title').value.trim();
+    const location = document.querySelector('#event-loction').value.trim();
     const description = document.querySelector('#event-description').value.trim();
     const id = +location.href.split('/')[location.href.split('/').length - 1];
-    if (title && description) {
+    if (title && location && description) {
       try {
         const response = await fetch(`/api/events/${id}`, {
           method: 'PUT',
-          body: JSON.stringify({ title, description }),
+          body: JSON.stringify({ title, location, description }),
           headers: { 'Content-Type': 'application/json' },
         });
   
