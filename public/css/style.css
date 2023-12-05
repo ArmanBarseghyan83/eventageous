@@ -16,7 +16,7 @@ nav {
 #body {
     display: flex;
     justify-content: center;
-    margin: 100px 80px;
+    margin: 50px 30px;
 }
 
 .card {
@@ -29,7 +29,8 @@ nav {
 }
 
 img {
-    border-radius: 5px !important;
+    border-radius: 5px;
+    /* max-width: 30%; */
 }
 
 .hide {
