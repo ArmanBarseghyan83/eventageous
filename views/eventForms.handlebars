@@ -1,5 +1,4 @@
-
-<div>
+<div class="card">
   <header>
     {{#if isCreate}}
     <h2>Create New Event</h2>
@@ -11,7 +10,7 @@
     {{#if isCreate}}
     <form action="/api/events" enctype="multipart/form-data" method="post">
       <div>
-        <div>Image</div>
+        <div class="lead">Image</div>
         <input type="file" name="image" required>
       </div>
       {{else}}
@@ -19,21 +18,21 @@
         {{/if}}
 
         <div>
-          <div>Title</div>
+          <div class="lead">Title</div>
           <input type="text" id="event-title" name="title" value="{{title}}" required>
         </div>
 
         <div>
           <div>Description</div>
-          <textarea id="event-description" name="description" required>{{description}}</textarea>
+          <textarea class="form-control mb-3" rows="5" id="event-description" name="description" required>{{description}}</textarea>
         </div>
 
         <div>
           {{#if isCreate}}
           <button id="create-event">Create</button>
           {{else}}
-          <button id="update-event">Update Event</button>
-          <button type="button" id="delete-event">Delete</button>
+          <button id="update-event" class="btn btn-primary">Update</button>
+          <button type="button" id="delete-event" class="btn btn-primary">Delete</button>
           {{/if}}
         </div>
 

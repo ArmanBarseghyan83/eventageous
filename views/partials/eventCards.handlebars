@@ -1,12 +1,13 @@
-<a class="event-card col-sm-6 col-md-4" href="/events/{{id}}">
+<a class="card col-sm-6 col-md-4 link-underline link-underline-opacity-0 overflow-auto ms-4" href="/events/{{id}}">
     <section>
+        <h5 class="card-title">{{title}}</h5>
+                        <p class="card-subtitle mb-2 text-body-secondary">Created by: {{user.username}}</p>
+    
         <img class="card-img-top" src="{{imageSrc}}" alt="">
         <div class="card-body">
-            <h2 class="card-title">{{title}}</h2>
-            <div class="card-text">
-                <h3>Created by: {{user.username}}</h3>
-                <h4>Description:</h4>
-                <p>{{description}}</p>
+            
+                <h6>Description:</h6>
+                <div class="card-text"><p>{{description}}</p>
             </div>
         </div>
     </section>
