@@ -22,12 +22,13 @@
     <div>
       <a href="/dashboard"><button class="login-btn btn btn-outline-info">Dashboard</button></a>
       {{#if loggedIn}}
-      <button class="login-btn btn btn-outline-info">Logout</button>
+      <button id="logout" class="login-btn btn btn-outline-info">Logout</button>
+      <a href="/dashboard/create"><button class="login-btn btn btn-outline-info">+ Add New Event</button></a>
       {{else}}
       <a href="/login"><button class="login-btn btn btn-outline-info">Login</button></a>
       {{/if}}
     </div>
-        <a href="/dashboard/create"><button class="login-btn btn btn-outline-info">+ Add New Event</button></a>
+        
 
 
   </nav>
