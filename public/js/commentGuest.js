@@ -59,7 +59,7 @@ const deleteCommentHandler = async (el) => {
 
 const editCommentHandler = (el) => {
 
-  commentsContent.classList.add('hide');
+  // commentsContent.classList.add('hide');
   commentformWrapper.classList.remove('hide');
 
   commentContent.value = el.dataset.commentcontent
@@ -114,7 +114,7 @@ const deleteGuestHandler = async (e) => {
 
 // Toggle between comments form and comments content elements 
 addComment.addEventListener('click', () => {
-  commentsContent.classList.add('hide');
+  // commentsContent.classList.add('hide');
   commentformWrapper.classList.remove('hide');
 });
 

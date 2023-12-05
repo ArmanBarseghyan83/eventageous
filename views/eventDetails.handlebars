@@ -1,84 +1,111 @@
-<section class="card">
-    <img src="{{imageSrc}}" alt="">
-    <div class="card-body">
-        <h1 class="card-title">{{title}}</h1>
-        <div class="card-text">
-            <h3>Created by: {{capitalize user.username}}</h3>
-            <h4>Description:</h4>
-            <p>{{description}}</p>
-        </div>
-        <div class="card">
-            <header>
-                <h2>Comments</h2>
-            </header>
-            <div class="comments-content">
-                <article>
-                    {{#each comments}}
-                    <div>    
-                        <h4>- {{capitalize user.username}}, {{format_date createdAt}}</h4>
-                        <p>{{content}} <span class="text-secondary">{{#if isEdited}}(edited){{/if}}</span> </p>
-                        {{#if (equal userId currentUserId)}}
-                        <button class="delete-comment" data-commentid="{{id}}">Delete</button>
-                        <button class="edit-comment" data-commentid="{{id}}" data-commentcontent="{{content}}">Edit</button>
-                        {{/if}}
-                    </div> 
-                    <hr>
-                    {{/each}}
-                </article>
-                <button id="add-comment">Add Comment</button>
-            </div>
-            <div class="comment-form-wrapper hide">
-                <form class="form comment-form">
-                    <input id="comment-id" type="number" hidden>
-                    <div>
-                        <textarea></textarea>
-                    </div>
-                    <div>
-                        {{#if loggedIn}}
-                        <button data-eventid="{{id}}">Submit</button>
-                        {{else}}
-                        <p>Please <a href="/login">Login</a> to Comment!</p>
-                        <button type="button">Submit</button>
-                        {{/if}}
-                        <a href="/events/{{id}}">Cancel</a>
-                    </div>
+<section class=" row">
 
-                </form>
+    <div class=" container col col-md-7 col-sm-12">
+        <h1 class="card-title">{{title}}</h1>
+        <div class="card-body">
+            <img src="{{imageSrc}}" alt="" class="w-50 rounded mb-3">
+            <div class="card-text">
+                <h3>Created by: {{capitalize user.username}}</h3>
+                <h4>Description:</h4>
+                <p>{{description}}</p>
             </div>
         </div>
     </div>
-</section>
 
-<section class="card">
-    <div class="card-body">
-        <h1 class="card-title">Guests</h1>
-        <div class="">
-            {{#if loggedIn}} 
-            {{#if isGuest}}
-            <button id="guset-signout" data-guestid="{{currentUserId}}">Sign Out</button>
-            {{else}}
-            <button id="guest-signup" data-eventid="{{id}}">Sign Up</button>
-            {{/if}}
-            {{else}}
-            <p>Please <a href="/login">Login</a> to sign up for this event!</p>
-            {{returnTo}}
-            <button type="button">Sign Up</button>
-            {{/if}}  
-        </div>
-        <div class="card">
-
+    <div class="card col col-md-4 col-sm-12 mb-5">
+        <div class="card-body">
+            <h1 class="card-title">Guests</h1>
+            <div class="mb-3">
+                {{#if loggedIn}}
+                {{#if isGuest}}
+                <button id="guset-signout" data-guestid="{{currentUserId}}" class="btn btn-secondary">Sign
+                    Out</button>
+                {{else}}
+                <button id="guest-signup" data-eventid="{{id}}" class="btn btn-info">Sign Up</button>
+                {{/if}}
+                {{else}}
+                <p>Please <a href="/login">Login</a> to sign up for this event!</p>
+                {{returnTo}}
+                <button type="button">Sign Up</button>
+                {{/if}}
+            </div>
             <div class="comments-content">
                 <article>
-                    {{#each (reverse eventGuests)}} 
+                    {{#each (reverse eventGuests)}}
                     <h4>- {{capitalize username}}</h4>
                     <hr>
                     {{/each}}
                 </article>
             </div>
-
         </div>
-
     </div>
+
+
+    <div class="card col-12">
+        <header>
+            <h2>Comments</h2>
+            <button id="add-comment" class="btn btn-primary mb-3">Add Comment</button>
+        </header>
+        <div class="comment-form-wrapper hide">
+            <form class="form comment-form">
+                <input id="comment-id" type="number" hidden>
+                <div>
+                    <textarea class="form-control mb-3"></textarea>
+                </div>
+                <div class="mb-3">
+                    {{#if loggedIn}}
+                    <button class="btn btn-primary" data-eventid="{{id}}">Submit</button>
+                    {{else}}
+                    <p>Please <a href="/login">Login</a> to Comment!</p>
+                    <button class="btn btn-primary" type="button">Submit</button>
+                    {{/if}}
+                    <a href="/events/{{id}}" class="btn btn-danger">Cancel</a>
+                </div>
+
+            </form>
+        </div>
+        <div class="comments-content overflow-auto">
+            <article>
+                {{#each comments}}
+                <div>
+                    <h4 class="col-9">- {{capitalize user.username}}, {{format_date createdAt}}</h4>
+                    
+                    <p class="col-9">{{content}} <span class="text-secondary">{{#if isEdited}}(edited){{/if}}</span> </p>
+                    {{#if (equal userId currentUserId)}}
+                    <button class="delete-comment button btn btn-danger" data-commentid="{{id}}"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-trash btn-danger" viewBox="0 0 16 16">
+                            <path
+                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z">
+                            </path>
+                            <path
+                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z">
+                            </path>
+                        </svg></button>
+                    <button class="edit-comment button btn btn-warning" data-commentid="{{id}}"
+                        data-commentcontent="{{content}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                            width="16" height="16">
+                            <path
+                                d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z">
+                            </path>
+                        </svg></button>
+                    {{/if}}
+                </div>
+                <hr>
+                {{/each}}
+            </article>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    {{!-- </div> --}}
+
+
 
 </section>
 

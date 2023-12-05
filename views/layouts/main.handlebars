@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <nav class="navbar bg-primary fixed-top justify-content-end">
+  <nav class="navbar bg-primary fixed-top justify-content-end mg-5">
 
     <div class="container-fluid">
       <a class="navbar-brand" href="/">Eventageous</a>
@@ -22,8 +22,8 @@
     <div>
       <a href="/dashboard"><button class="login-btn btn btn-outline-info">Dashboard</button></a>
       {{#if loggedIn}}
-      <button id="logout" class="login-btn btn btn-outline-info">Logout</button>
       <a href="/dashboard/create"><button class="login-btn btn btn-outline-info">+ Add New Event</button></a>
+      <button id="logout" class="login-btn btn btn-outline-info">Logout</button>
       {{else}}
       <a href="/login"><button class="login-btn btn btn-outline-info">Login</button></a>
       {{/if}}
