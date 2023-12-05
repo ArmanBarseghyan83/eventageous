@@ -12,8 +12,9 @@ const loginFormHandler = async (event) => {
       headers: { 'Content-Type': 'application/json' },
     });
 
+    // value of the returnto variable comes from server and set in the login.handlebars
     if (response.ok) {
-      document.location.replace('/');
+      document.location.replace(document.querySelector('#login-header').dataset.returnto || '/');
     } else {
       alert('Failed to log in.');
     }
@@ -34,8 +35,9 @@ const signupFormHandler = async (event) => {
       headers: { 'Content-Type': 'application/json' },
     });
 
+    // value of the returnto variable comes from server and set in the login.handlebars
     if (response.ok) {
-      document.location.replace('/');
+      location.replace(document.querySelector('#login-header').dataset.returnto || '/');
     } else {
       alert('Failed to sign up.');
     }

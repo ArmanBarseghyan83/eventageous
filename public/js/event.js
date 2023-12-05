@@ -25,7 +25,7 @@
     }
   };
   
-  //Get the blog id from the url and fetch the backend api for deleting the event.
+  //Get the event id from the url and fetch the backend api for deleting the event. 
   const deleteEventHandler = async () => {
     const id = +location.href.split('/')[location.href.split('/').length - 1];
     try {

@@ -27,6 +27,9 @@ router.get('/', async (req, res) => {
       })
     );
 
+    // Remove from the session returnTo varuable which contains originalUrl
+    delete req.session.returnTo;
+
     res.render('homepage', {
       loggedIn: req.session.currentUser?.loggedIn,
       events: events.reverse(),
@@ -56,6 +59,20 @@ router.get('/events/:id', async (req, res) => {
 
     const event = eventData.get({ plain: true });
 
+    // Add to the comments array the current user id
+    event.comments = event.comments.map((el) => ({
+      ...el,
+      currentUserId: req.session.currentUser?.userId,
+    }));
+
+    // Check if the current user is a guest for this event
+    const isGuest = event.eventGuests
+      .map((el) => el.id)
+      .includes(req.session.currentUser?.userId);
+
+    // Save to the session originalUrl of this page  
+    req.session.returnTo = req.originalUrl;
+
     sharp(event.bufferData)
       .resize(700)
       .toBuffer()
@@ -65,8 +82,10 @@ router.get('/events/:id', async (req, res) => {
 
         res.render('eventDetails', {
           loggedIn: req.session.currentUser?.loggedIn,
+          currentUserId: req.session.currentUser?.userId,
           ...event,
           imageSrc,
+          isGuest,
         });
       });
   } catch (err) {
@@ -74,7 +93,7 @@ router.get('/events/:id', async (req, res) => {
   }
 });
 
-// GET all events for user's dashboard page
+// GET all events for user's dashboard page  
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
     const eventsData = await Event.findAll({
@@ -146,7 +165,7 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login');
+  res.render('login', { returnTo: req.session.returnTo });
 });
 
 module.exports = router;
