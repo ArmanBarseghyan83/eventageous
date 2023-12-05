@@ -15,6 +15,10 @@ Comment.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    isEdited: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
   },
   {
     sequelize,

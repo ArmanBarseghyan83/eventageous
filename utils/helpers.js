@@ -14,5 +14,13 @@ module.exports = {
     const resizedBuffer = sharp(buffer).resize(300).toBuffer();
     const base64Image = resizedBuffer.toString('base64');
     return `data:image/png;base64,${base64Image}`;
+  },
+
+  equal: (x, y) => {
+    return x === y
+  },
+
+  reverse: (arr) => {
+    return arr.reverse()
   }
 };

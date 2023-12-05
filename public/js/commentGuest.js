@@ -1,22 +1,26 @@
-const addComment = document.querySelector('.comments-content button');
+const addComment = document.querySelector('#add-comment');
+const deleteComment = document.querySelectorAll('.delete-comment');
+const editComment = document.querySelectorAll('.edit-comment');
 const commentsContent = document.querySelector('.comments-content');
 const commentformWrapper = document.querySelector('.comment-form-wrapper');
 const submitComment = document.querySelector('.comment-form button');
 const commentContent = document.querySelector('.comment-form textarea');
 const guestInput = document.querySelector('#guest-form input');
-const guestForm = document.querySelector('#guest-form');
+const guestSignUp = document.querySelector('#guest-signup');
+const guestSignout = document.querySelector('#guset-signout');
 
 //Get the data from the user input and fetch the backend api for creating a new comment.
-const addCommentHundler = async (e) => {
+const addCommentHandler = async (e) => {
   e.preventDefault();
   const content = commentContent.value.trim();
   const eventId = submitComment.dataset.eventid;
-  console.log(eventId, content);
+  const id = document.querySelector('#comment-id').value
+
   if (content) {
     try {
       const response = await fetch('/api/comments', {
         method: 'POST',
-        body: JSON.stringify({ content, eventId }),
+        body: JSON.stringify({ content, eventId, id }),
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -33,10 +37,40 @@ const addCommentHundler = async (e) => {
   }
 };
 
-const addGuest = async (e) => {
+const deleteCommentHandler = async (el) => {
+  const id = el.dataset.commentid;
+
+  try {
+    const response = await fetch('/api/comments', {
+      method: 'DELETE',
+      body: JSON.stringify({ id }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      el.parentElement.remove();
+    } else {
+      alert('Failed to Delete.');
+    }
+  } catch (e) {
+    alert('Failed to Delete.');
+  }
+};
+
+const editCommentHandler = (el) => {
+
+  commentsContent.classList.add('hide');
+  commentformWrapper.classList.remove('hide');
+
+  commentContent.value = el.dataset.commentcontent
+  document.querySelector('#comment-id').value = el.dataset.commentid
+}
+
+//Get the data from the user input and fetch the backend api for creating a new guest.
+const addGuestHandler = async (e) => {
   e.preventDefault();
 
-  const event_id = guestInput.value.trim();
+  const event_id = guestSignUp.dataset.eventid;
 
   if (event_id) {
     try {
@@ -57,11 +91,47 @@ const addGuest = async (e) => {
   }
 };
 
+const deleteGuestHandler = async (e) => {
+  e.preventDefault();
+  const id = guestSignout.dataset.guestid;
+
+  try {
+    const response = await fetch('/api/guests', {
+      method: 'DELETE',
+      body: JSON.stringify({ id }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      document.location.reload();
+    } else {
+      alert('Failed to Delete.');
+    }
+  } catch (e) {
+    alert('Failed to Delete.');
+  }
+};
+
+// Toggle between comments form and comments content elements 
 addComment.addEventListener('click', () => {
   commentsContent.classList.add('hide');
   commentformWrapper.classList.remove('hide');
 });
 
-submitComment.addEventListener('click', addCommentHundler);
+deleteComment.forEach((el) => {
+  el.addEventListener('click', () => {
+    deleteCommentHandler(el);
+  });
+});
 
-guestForm.addEventListener('submit', addGuest);
+editComment.forEach((el) => {
+  el.addEventListener('click', () => {
+    editCommentHandler(el)
+  });
+});
+
+submitComment?.addEventListener('click', addCommentHandler);
+
+guestSignUp?.addEventListener('click', addGuestHandler);
+
+guestSignout?.addEventListener('click', deleteGuestHandler);
