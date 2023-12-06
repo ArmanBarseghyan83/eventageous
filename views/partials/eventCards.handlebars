@@ -1,18 +1,18 @@
 
-<div class="col-md-6 col-lg-4 mb-4">
+<div class="col-md-6 col-lg-4 mb-4" >
     <div class="home-item card overflow-hidden">
         <a href="/events/{{id}}" class="text-decoration-none">
-            <div class=" img-wrapper ">
+            <div class=" img-wrapper h-50">
                 <img class="card-img-top" src="{{imageSrc}}" alt="Card image">
             </div>
 
-            <div class="card-body">
+            <div class="card-body py-1">
                 <h4 class="card-title">{{title}}</h4>
                 <p class="card-text">{{description}}</p>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Created by: <span class="h5">{{capitalize user.username}}</span></li>
-                <li class="list-group-item">Address: {{address}}</li>
+            <ul class="list-group list-group-flush" >
+                <li class="list-group-item" style="background-color: #b0d7ee;">Created by: <span class="h6">{{capitalize user.username}}</span></li>
+                <li class="list-group-item" style="background-color: #b0d7ee;">Address: <span class="h6">{{address}}</span></li>
             </ul>
         </a>
     </div>

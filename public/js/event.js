@@ -14,7 +14,8 @@ const updateEventHandler = async (e) => {
       });
 
       if (response.ok) {
-        document.location.replace('/dashboard');
+        // Go to that event page which was updated.
+        document.location.replace(`/events/${id}`);
       } else {
         alert('Failed to update.');
       }

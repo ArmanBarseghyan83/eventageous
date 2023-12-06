@@ -1,5 +1,5 @@
-        <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
-        <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
 <section>
     <section class="row">
 
@@ -15,36 +15,37 @@
                 <div id="map" data-zipcode="{{zipcode}}" style="height: 400px; width: 100%"></div>
             </div>
         </div>
-<script>
-   mapboxgl.accessToken = 'pk.eyJ1IjoibWVhZGtjIiwiYSI6ImNscHQ3Y2Q3eDA5c28ya28xNmowMDI3ZGoifQ.A4FW4_762haYazL71o1bZg'; // Mapbox API access token (generate a free one on their site)
+
+        <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoibWVhZGtjIiwiYSI6ImNscHQ3Y2Q3eDA5c28ya28xNmowMDI3ZGoifQ.A4FW4_762haYazL71o1bZg'; // Mapbox API access token (generate a free one on their site)
 
 
-   // Get the map container and zip code
-   const mapContainer = document.getElementById('map');
-   const zipcode = mapContainer.dataset.zipcode;
+            // Get the map container and zip code
+            const mapContainer = document.getElementById('map');
+            const zipcode = mapContainer.dataset.zipcode;
 
 
-   // Fetch coordinates based on the zip code using Mapbox Geocoding API
-   fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${zipcode}.json?access_token=${mapboxgl.accessToken}`)
-       .then(response => response.json())
-       .then(data => {
-           const coordinates = data.features[0].center;
+            // Fetch coordinates based on the zip code using Mapbox Geocoding API
+            fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${zipcode}.json?access_token=${mapboxgl.accessToken}`)
+                .then(response => response.json())
+                .then(data => {
+                    const coordinates = data.features[0].center;
 
 
-           // Initialize the map with dynamic center and zoom
-           const map = new mapboxgl.Map({
-               container: 'map', // container id
-               style: 'mapbox://styles/mapbox/streets-v11', // map style
-               center: coordinates, // dynamic center based on zip code
-               zoom: 13 // adjust the zoom level
-           });
-       })
-       .catch(error => console.error('Error fetching coordinates:', error));
-</script>
+                    // Initialize the map with dynamic center and zoom
+                    const map = new mapboxgl.Map({
+                        container: 'map', // container id
+                        style: 'mapbox://styles/mapbox/streets-v11', // map style
+                        center: coordinates, // dynamic center based on zip code
+                        zoom: 13 // adjust the zoom level
+                    });
+                })
+                .catch(error => console.error('Error fetching coordinates:', error));
+        </script>
 
         <div class="card col-12 col-md-4 mb-3 ">
             <div class="card-body">
-                <h1 class="card-title">Guests</h1>
+                <h2 class="card-title">Guests</h2>
                 <div class="mb-3">
                     {{#if loggedIn}}
                     {{#if isGuest}}
@@ -55,8 +56,6 @@
                     {{/if}}
                     {{else}}
                     <p>Please <a href="/login">Login</a> to sign up for this event!</p>
-                    {{returnTo}}
-                    <button type="button">Sign Up</button>
                     {{/if}}
                 </div>
                 <div>
@@ -69,7 +68,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="card col-12 p-4">
             <header>
@@ -89,16 +87,16 @@
                         <p>Please <a href="/login">Login</a> to Comment!</p>
                         <button class="btn btn-primary" type="button">Submit</button>
                         {{/if}}
-                        <button type="button" id="cancel-comment" class="btn btn-danger">Cancel</button>
+                        <button type="button" id="cancel-comment" class="btn btn-secondary">Cancel</button>
                     </div>
-
                 </form>
             </div>
+
             <div class="comments-content ">
                 <article id="comments">
                     {{#each (reverse comments)}}
                     <div class="position-relative">
-                        <h4 class="col-9">- {{capitalize user.username}}, {{format_date createdAt}}</h4>
+                        <h5 class="col-9">- {{capitalize user.username}}, {{format_date createdAt}}</h5>
                         <p class="col-9">{{content}} <span class="text-secondary">{{#if isEdited}}(edited){{/if}}</span>
                         </p>
                         {{#if (equal userId currentUserId)}}
@@ -111,14 +109,16 @@
                                 <path
                                     d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z">
                                 </path>
-                            </svg></button>
-                        <button class="edit-comment button btn btn-warning" data-commentid="{{id}}"
+                            </svg>
+                        </button>
+                        <button class="edit-comment button btn btn-info" data-commentid="{{id}}"
                             data-commentcontent="{{content}}"><svg xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 16 16" width="16" height="16">
                                 <path
                                     d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z">
                                 </path>
-                            </svg></button>
+                            </svg>
+                        </button>
                         {{/if}}
                         <hr>
                     </div>

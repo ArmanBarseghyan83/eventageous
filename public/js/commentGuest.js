@@ -26,6 +26,7 @@ const addCommentHandler = async (e) => {
       });
 
       if (response.ok) {
+        // If no id means a new comment was created, else the comment was updated.
         if (!id) {
           document.location.reload();
         } else {
@@ -48,6 +49,7 @@ const addCommentHandler = async (e) => {
   }
 };
 
+// Get the id of the comment saved in data attribute and fetch the backend api to delete that comment.
 const deleteCommentHandler = async (el) => {
   const confirm = window.confirm('Are you sure?');
 
@@ -72,17 +74,20 @@ const deleteCommentHandler = async (el) => {
   }
 };
 
+// Open the form for editing the comment and prepopulate the inputs using data saved in the data attributes.
 const editCommentHandler = (el) => {
   commentformWrapper.classList.remove('hide');
   commentContent.value = el.dataset.commentcontent;
   document.querySelector('#comment-id').value = el.dataset.commentid;
 };
 
+// Close the comment form when canceled.
 const cancelCommentHandler = () => {
   commentformWrapper.classList.add('hide');
+  addComment.classList.remove('hide')
 };
 
-//Get the data from the user input and fetch the backend api for creating a new guest.
+// Get the data from the user input and fetch the backend api for creating a new guest.
 const addGuestHandler = async (e) => {
   e.preventDefault();
 
@@ -107,6 +112,7 @@ const addGuestHandler = async (e) => {
   }
 };
 
+// Get the id of the guest saved in data attribute and fetch the backend api to delete that guest.
 const deleteGuestHandler = async (e) => {
   e.preventDefault();
   const id = guestSignout.dataset.guestid;
@@ -128,11 +134,12 @@ const deleteGuestHandler = async (e) => {
   }
 };
 
-// Toggle between comments form and comments content elements
+
 addComment.addEventListener('click', () => {
   document.querySelector('#comment-id').value = '';
   commentContent.value = '';
   commentformWrapper.classList.remove('hide');
+  addComment.classList.add('hide')
 });
 
 deleteComment.forEach((el) => {

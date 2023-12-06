@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(215, 237, 250)
+  background-color: #c6e7fd
 }
 
 main {
@@ -15,17 +15,33 @@ main {
   overflow: hidden;
 }
 
+.img-wrapper h2 {
+  top: .5rem;
+  left: .5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 12rem;
+}
+
 .card {
   border: 5px solid rgb(0, 162, 255);
   border-radius: 25px;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  background-color: #e2eef7;
 }
 
+.card li,
 .card h4,
 .home-item.card p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.dashboard-item:hover,
+.home-item:hover {
+  filter: brightness(.9);
 }
 
 .hide {

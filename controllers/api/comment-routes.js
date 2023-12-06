@@ -3,6 +3,7 @@ const { Comment } = require('../../models');
 
 // Create or update comment
 router.post('/', async (req, res) => {
+  // If the body contains id, update the comment, else create a new camment.
   if (!req.body.id) {
     try {
       const comment = await Comment.create({
