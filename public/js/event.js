@@ -2,13 +2,14 @@
 const updateEventHandler = async (e) => {
   e.preventDefault();
   const title = document.querySelector('#event-title').value.trim();
+  const address = document.querySelector('#event-address').value.trim();
   const description = document.querySelector('#event-description').value.trim();
   const id = +location.href.split('/')[location.href.split('/').length - 1];
-  if (title && description) {
+  if (title && address && description) {
     try {
       const response = await fetch(`/api/events/${id}`, {
         method: 'PUT',
-        body: JSON.stringify({ title, description }),
+        body: JSON.stringify({ title, address, description }),
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -17,6 +18,7 @@ const updateEventHandler = async (e) => {
       } else {
         alert('Failed to update.');
       }
+
     } catch (e) {
       alert('Failed to update.');
     }
@@ -32,7 +34,7 @@ const deleteEventHandler = async () => {
 
     const delEl = document.querySelector('#delete-event')
     const id = delEl.dataset.id
-    
+
     try {
       const response = await fetch(`/api/events/${id}`, { method: 'DELETE' });
 
