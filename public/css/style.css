@@ -1,38 +1,55 @@
-nav {
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-    /* padding: 50px; */
+body {
+  background-color: rgb(215, 237, 250)
 }
 
-.container-fluid {
-    width: 30% !important;
-    margin: 0px 10px;
+main {
+    margin:7rem 0;
 }
 
-.login-btn {
-    border-radius: 5px;
-    margin: 5px 15px 5px 0px;
+.navbar-brand {
+    font-size: 2rem;
 }
 
-#body {
-    display: flex;
-    justify-content: center;
-    margin: 50px 30px;
+.img-wrapper {
+  height: 13rem;
+  overflow: hidden;
 }
 
 .card {
-    max-height: 500px;
-    font-size: small;
-    padding: 20px;
-    border: 5px solid rgb(0, 162, 255);
-    border-radius: 25px;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  border: 5px solid rgb(0, 162, 255);
+  border-radius: 25px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
-img {
-    border-radius: 5px;
-    /* max-width: 30%; */
+.card h4,
+.home-item.card p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hide {
-    display: none;
+  display: none;
+}
+
+.comments-content {
+  max-height: 25rem;
+  overflow-y: scroll;
+}
+
+.guest-content {
+  max-height: 100%;
+  overflow-y: scroll;
+}
+
+#comments button {
+  width: 3.9rem;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00518028;
 }

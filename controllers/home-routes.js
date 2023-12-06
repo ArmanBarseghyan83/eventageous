@@ -6,6 +6,9 @@ const sharp = require('sharp');
 // GET all events for homepage
 router.get('/', async (req, res) => {
   try {
+    const userdata = await User.findByPk(req.session.currentUser?.userId);
+    const currentUser = userdata?.get({ plain: true }).username;
+
     const eventsData = await Event.findAll({
       include: [{ model: User }],
     });
@@ -33,6 +36,7 @@ router.get('/', async (req, res) => {
     res.render('homepage', {
       loggedIn: req.session.currentUser?.loggedIn,
       events: events.reverse(),
+      currentUser,
     });
   } catch (err) {
     res.status(500).json(err.message);
@@ -42,6 +46,9 @@ router.get('/', async (req, res) => {
 // GET an event for event details page
 router.get('/events/:id', async (req, res) => {
   try {
+    const userdata = await User.findByPk(req.session.currentUser?.userId);
+    const currentUser = userdata?.get({ plain: true }).username;
+
     const eventData = await Event.findByPk(req.params.id, {
       include: [
         { model: User },
@@ -70,7 +77,7 @@ router.get('/events/:id', async (req, res) => {
       .map((el) => el.id)
       .includes(req.session.currentUser?.userId);
 
-    // Save to the session originalUrl of this page  
+    // Save to the session originalUrl of this page
     req.session.returnTo = req.originalUrl;
 
     sharp(event.bufferData)
@@ -86,6 +93,7 @@ router.get('/events/:id', async (req, res) => {
           ...event,
           imageSrc,
           isGuest,
+          currentUser,
         });
       });
   } catch (err) {
@@ -93,9 +101,12 @@ router.get('/events/:id', async (req, res) => {
   }
 });
 
-// GET all events for user's dashboard page  
+// GET all events for user's dashboard page
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
+    const userdata = await User.findByPk(req.session.currentUser?.userId);
+    const currentUser = userdata?.get({ plain: true }).username;
+
     const eventsData = await Event.findAll({
       where: { userId: req.session.currentUser.userId },
       include: [{ model: User }],
@@ -122,6 +133,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
       loggedIn: req.session.currentUser?.loggedIn,
       idDashboard: true,
       events: events.reverse(),
+      currentUser,
     });
   } catch (err) {
     res.status(500).json(err.message);
@@ -130,16 +142,27 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
 // Create event page
 router.get('/dashboard/create', async (req, res) => {
-  res.render('eventForms', {
-    isCreate: true,
-    loggedIn: req.session.currentUser?.loggedIn,
-    idDashboard: true,
-  });
+  try {
+    const userdata = await User.findByPk(req.session.currentUser?.userId);
+    const currentUser = userdata?.get({ plain: true }).username;
+
+    res.render('eventForms', {
+      isCreate: true,
+      loggedIn: req.session.currentUser?.loggedIn,
+      idDashboard: true,
+      currentUser,
+    });
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
 });
 
 // Update event page
 router.get('/dashboard/update/:id', async (req, res) => {
   try {
+    const userdata = await User.findByPk(req.session.currentUser?.userId);
+    const currentUser = userdata?.get({ plain: true }).username;
+
     const eventData = await Event.findByPk(req.params.id);
     if (!eventData) {
       res.status(404).json({ message: 'No event with this id!' });
@@ -152,6 +175,7 @@ router.get('/dashboard/update/:id', async (req, res) => {
       loggedIn: req.session.currentUser?.loggedIn,
       idDashboard: true,
       ...event,
+      currentUser
     });
   } catch (err) {
     res.status(500).json(err.message);

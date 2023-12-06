@@ -7,46 +7,55 @@
   <title>Eventageous</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"></script>
   <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
-<body>
-  <nav class="navbar bg-primary fixed-top justify-content-end mg-5">
-
+<body class="container">
+  <nav class=" border navbar fixed-top navbar-expand-md bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">Eventageous</a>
+      <div>
+        <a class="navbar-brand " href="/">Eventageous</a>
+        {{#if loggedIn}}
+        <div class="text-info">{{capitalize currentUser}}</div>
+        {{/if}}
+      </div>
+      <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+        data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav me-auto mt-1 ms-3">
+          <li class="nav-item btn btn-outline-info m-2 p-0"><a class="nav-link p-2 text-light" href="/">Home</a></li>
+          <li class="nav-item btn btn-outline-info m-2 p-0"><a class="nav-link p-2 text-light" href="/dashboard">Dashboard</a></li>
+          {{#if loggedIn}}
+          <li class="nav-item btn btn-outline-info m-2 p-0"><a class="nav-link p-2 text-light" href="/dashboard/create">+ Add New Event</a>
+          </li>
+          <li class="nav-item btn btn-outline-info m-2 p-0"><button class="nav-link p-2 w-100 text-light" id="logout">Logout</button></li>
+          {{else}}
+          <li class="nav-item btn btn-outline-info m-2 p-0"><a class="nav-link p-2 text-light" href="/login">Login</a></li>
+          {{/if}}
+        </ul>
+      </div>
     </div>
-
-    <a href="/"><button class="login-btn btn btn-outline-info">Home</button></a>
-
-    <div>
-      <a href="/dashboard"><button class="login-btn btn btn-outline-info">Dashboard</button></a>
-      {{#if loggedIn}}
-      <a href="/dashboard/create"><button class="login-btn btn btn-outline-info">+ Add New Event</button></a>
-      <button id="logout" class="login-btn btn btn-outline-info">Logout</button>
-      {{else}}
-      <a href="/login"><button class="login-btn btn btn-outline-info">Login</button></a>
-      {{/if}}
-    </div>
-        
-
-
   </nav>
-  <header>
+
+  <header id="main-header">
     {{#if idDashboard}}
-    <h1>Your Dashboard</h1>
+    <h1 class="mb-3">Your Dashboard</h1>
     {{else}}
     <h1>All Events</h1>
     {{/if}}
   </header>
   <main>
-    <section id="body">
+   
       {{{body}}}
-    </section>
+    
   </main>
 
   <script src="/js/logout.js"></script>
- 
+
 </body>
 
 </html>
