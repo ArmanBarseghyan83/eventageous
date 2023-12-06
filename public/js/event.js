@@ -27,17 +27,20 @@
   
   //Get the event id from the url and fetch the backend api for deleting the event. 
   const deleteEventHandler = async () => {
-    const id = +location.href.split('/')[location.href.split('/').length - 1];
-    try {
-      const response = await fetch(`/api/events/${id}`, { method: 'DELETE' });
-  
-      if (response.ok) {
-        document.location.replace('/dashboard');
-      } else {
+    const confirm = window.confirm('Are you sure?')
+    if (confirm) {
+      const id = +location.href.split('/')[location.href.split('/').length - 1];
+      try {
+        const response = await fetch(`/api/events/${id}`, { method: 'DELETE' });
+    
+        if (response.ok) {
+          document.location.replace('/dashboard');
+        } else {
+          alert('Failed to delete.');
+        }
+      } catch (e) {
         alert('Failed to delete.');
       }
-    } catch (e) {
-      alert('Failed to delete.');
     }
   };
   

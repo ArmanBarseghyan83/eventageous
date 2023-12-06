@@ -1,44 +1,47 @@
-<div class="card w-50">
-  <header>
-    {{#if isCreate}}
-    <h2>Create New Event</h2>
-    {{else}}
-    <h2>Edit Event</h2>
-    {{/if}}
-  </header>
-  <div>
-    {{#if isCreate}}
-    <form action="/api/events" enctype="multipart/form-data" method="post">
-      <div>
-        <div class="lead">Image</div>
-        <input class="form-control mb-3" type="file" name="image" required>
-      </div>
+<div class="container">
+  <div class="card p-4">
+    <header>
+      {{#if isCreate}}
+      <h2>Create New Event</h2>
       {{else}}
-      <form>
-        {{/if}}
-
+      <h2>Edit Event</h2>
+      {{/if}}
+    </header>
+    <div>
+      {{#if isCreate}}
+      <form class="form" action="/api/events" enctype="multipart/form-data" method="post">
         <div>
-          <div class="lead ">Title</div>
-          <input class="form-control mb-3" type="text" id="event-title" name="title" value="{{title}}" required>
+          <div class="lead">Image</div>
+          <input class="form-control mb-3" type="file" name="image" required>
         </div>
-
-        <div>
-          <div class="lead">Description</div>
-          <textarea class="form-control mb-3" rows="5" id="event-description" name="description" required>{{description}}</textarea>
-        </div>
-
-        <div>
-          {{#if isCreate}}
-          <button id="create-event" class="btn btn-primary">Create</button>
-          {{else}}
-          <button id="update-event" class="btn btn-success">Update</button>
-          <button type="button" id="delete-event" class="btn btn-danger">Delete</button>
+        {{else}}
+        <form>
           {{/if}}
-        </div>
 
-      </form>
+          <div>
+            <div class="lead ">Title</div>
+            <input class="form-control mb-3" type="text" id="event-title" name="title" value="{{title}}" required>
+          </div>
+
+          <div>
+            <div class="lead">Description</div>
+            <textarea class="form-control mb-3" rows="5" id="event-description" name="description"
+              required>{{description}}</textarea>
+          </div>
+
+          <div>
+            {{#if isCreate}}
+            <button id="create-event" class="btn btn-primary">Create</button>
+            {{else}}
+            <button id="update-event" class="btn btn-success">Update</button>
+            <button type="button" id="delete-event" class="btn btn-danger">Delete</button>
+            {{/if}}
+            <a href="/dashboard" class="btn btn-secondary">Cancel</a>
+          </div>
+
+        </form>
+    </div>
   </div>
 </div>
-
 
 <script src="/js/event.js"></script>
