@@ -1,5 +1,8 @@
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
 <section>
     <section class="row">
+
         <div class="card col-12 col-md-8 mb-3 p-4">
             <h1 class="mb-3 ">{{title}}</h1>
             <div class="">
@@ -9,8 +12,35 @@
                     <p><span class="h6">Address: {{address}}</span></p>
                     <p><span class="h6">Description:</span> {{description}}</p>
                 </div>
+                <div id="map" data-zipcode="{{zipcode}}" style="height: 400px; width: 100%"></div>
             </div>
         </div>
+<script>
+   mapboxgl.accessToken = 'pk.eyJ1IjoibWVhZGtjIiwiYSI6ImNscHQ3Y2Q3eDA5c28ya28xNmowMDI3ZGoifQ.A4FW4_762haYazL71o1bZg'; // Mapbox API access token (generate a free one on their site)
+
+
+   // Get the map container and zip code
+   const mapContainer = document.getElementById('map');
+   const zipcode = mapContainer.dataset.zipcode;
+
+
+   // Fetch coordinates based on the zip code using Mapbox Geocoding API
+   fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${zipcode}.json?access_token=${mapboxgl.accessToken}`)
+       .then(response => response.json())
+       .then(data => {
+           const coordinates = data.features[0].center;
+
+
+           // Initialize the map with dynamic center and zoom
+           const map = new mapboxgl.Map({
+               container: 'map', // container id
+               style: 'mapbox://styles/mapbox/streets-v11', // map style
+               center: coordinates, // dynamic center based on zip code
+               zoom: 13 // adjust the zoom level
+           });
+       })
+       .catch(error => console.error('Error fetching coordinates:', error));
+</script>
 
         <div class="card col-12 col-md-4 mb-3 ">
             <div class="card-body">
