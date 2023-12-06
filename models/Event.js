@@ -22,6 +22,10 @@ Event.init(
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
+    }, 
+    zipcode: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     bufferData: {
       type: DataTypes.BLOB,
