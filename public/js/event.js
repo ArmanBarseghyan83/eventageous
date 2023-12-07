@@ -19,7 +19,6 @@ const updateEventHandler = async (e) => {
       } else {
         alert('Failed to update.');
       }
-
     } catch (e) {
       alert('Failed to update.');
     }
@@ -32,9 +31,8 @@ const updateEventHandler = async (e) => {
 const deleteEventHandler = async () => {
   const confirm = window.confirm('Are you sure?');
   if (confirm) {
-
-    const delEl = document.querySelector('#delete-event')
-    const id = delEl.dataset.id
+    const delEl = document.querySelector('#delete-event');
+    const id = delEl.dataset.id;
 
     try {
       const response = await fetch(`/api/events/${id}`, { method: 'DELETE' });

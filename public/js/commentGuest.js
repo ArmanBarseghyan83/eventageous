@@ -84,7 +84,7 @@ const editCommentHandler = (el) => {
 // Close the comment form when canceled.
 const cancelCommentHandler = () => {
   commentformWrapper.classList.add('hide');
-  addComment.classList.remove('hide')
+  addComment.classList.remove('hide');
 };
 
 // Get the data from the user input and fetch the backend api for creating a new guest.
@@ -115,12 +115,12 @@ const addGuestHandler = async (e) => {
 // Get the id of the guest saved in data attribute and fetch the backend api to delete that guest.
 const deleteGuestHandler = async (e) => {
   e.preventDefault();
-  const id = guestSignout.dataset.guestid;
+  const event_id = guestSignout.dataset.eventid;
 
   try {
     const response = await fetch('/api/guests', {
       method: 'DELETE',
-      body: JSON.stringify({ id }),
+      body: JSON.stringify({ event_id }),
       headers: { 'Content-Type': 'application/json' },
     });
 
@@ -134,12 +134,11 @@ const deleteGuestHandler = async (e) => {
   }
 };
 
-
 addComment.addEventListener('click', () => {
   document.querySelector('#comment-id').value = '';
   commentContent.value = '';
   commentformWrapper.classList.remove('hide');
-  addComment.classList.add('hide')
+  addComment.classList.add('hide');
 });
 
 deleteComment.forEach((el) => {
