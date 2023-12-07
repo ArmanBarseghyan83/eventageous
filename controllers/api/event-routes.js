@@ -12,7 +12,7 @@ router.post('/', upload.single('image'), async (req, res) => {
   const file = req.file;
 
   const eventBody = { ...req.body };
-  
+
   if (!file) {
     res.status(400).send('No file uploaded');
   } else {
@@ -21,12 +21,15 @@ router.post('/', upload.single('image'), async (req, res) => {
       .toBuffer()
       .then(async (resizedBuffer) => {
         try {
-          await Event.create({
+          const event = await Event.create({
             ...eventBody,
             userId: req.session.currentUser.userId,
             bufferData: resizedBuffer,
           });
-          res.status(200).redirect('/dashboard');
+
+          const eventId = event.get({ plain: true }).id;
+
+          res.status(200).redirect(`/events/${eventId}`);
         } catch (err) {
           res.status(400).json(err.message);
         }
@@ -48,7 +51,6 @@ router.put('/:id', async (req, res) => {
 
 // Delete an event by its `id` value
 router.delete('/:id', async (req, res) => {
-
   try {
     const event = await Event.destroy({
       where: { id: req.params.id },
