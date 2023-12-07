@@ -29,7 +29,7 @@ Eventageous is a web application designed to help users organize and share their
 
 ## Getting Started
 
-- **Hosted Web Application** The easiest way to get started is to just use the web-hosted version of our web app at:
+- **Hosted Web Application** The easiest way to get started is to just use the web-hosted version of our web app at: [Eventageous](https://eventageous-64c7552fd00e.herokuapp.com/)
 
 - **Go Fork Yourself!** Download the repository.  Install all the dependencies.  Initiate the database with mysql.  Run the app on your local machine at localhost:3001.  More detailed description found in [installation](#installation).
 
@@ -47,7 +47,7 @@ Eventageous is a web application designed to help users organize and share their
 
 ### Installation
 
-1. Clone the repository: --ENTER REPO HERE--
+1. Clone the repository: https://github.com/ArmanBarseghyan83/eventageous
 2. Install dependencies: `npm install`
 3. Set up your connection in the `config.js` file.
 4. Run the application: `npm start`
