@@ -2,12 +2,12 @@
     <div class="dashboard-item card overflow-hidden">
         <a href="/events/{{id}}" class="text-decoration-none">
             <div class=" img-wrapper h-50">
-                <h2 class="position-absolute h1 ">{{title}}</h2>
+                <h2 class="position-absolute h1 text-info">{{title}}</h2>
                 <img class="card-img-top" src="{{imageSrc}}" alt="Card image cap">
             </div>
         </a>
         <div class="d-flex justify-content-between bg-primary">
-            <button id="delete-event" type="button" data-id="{{id}}" class="button btn btn-danger w-50" href=""><svg
+            <button type="button" data-id="{{id}}" class="delete-event button btn btn-danger w-50" href=""><svg
                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-trash btn-danger" viewBox="0 0 16 16">
                     <path

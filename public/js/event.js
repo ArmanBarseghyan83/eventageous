@@ -27,12 +27,11 @@ const updateEventHandler = async (e) => {
   }
 };
 
-//Get the event id from the url and fetch the backend api for deleting the event.
-const deleteEventHandler = async () => {
+//Get the event id from the data attribute and fetch the backend api for deleting the event.
+const deleteEventHandler = async (e) => {
   const confirm = window.confirm('Are you sure?');
   if (confirm) {
-    const delEl = document.querySelector('#delete-event');
-    const id = delEl.dataset.id;
+    const id = e.target.dataset.id;
 
     try {
       const response = await fetch(`/api/events/${id}`, { method: 'DELETE' });
@@ -52,6 +51,6 @@ document
   .querySelector('#update-event')
   ?.addEventListener('click', updateEventHandler);
 
-document
-  .querySelector('#delete-event')
-  ?.addEventListener('click', deleteEventHandler);
+document.querySelectorAll('.delete-event')?.forEach((el) => {
+  el.addEventListener('click', deleteEventHandler);
+});
