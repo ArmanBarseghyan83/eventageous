@@ -17,7 +17,7 @@ router.post('/', upload.single('image'), async (req, res) => {
     res.status(400).send('No file uploaded');
   } else {
     sharp(file.buffer)
-      .resize(300)
+      .resize(600)
       .toBuffer()
       .then(async (resizedBuffer) => {
         try {
