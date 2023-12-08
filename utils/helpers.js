@@ -3,7 +3,9 @@ const sharp = require('sharp');
 // Helpers to use in handlebars
 module.exports = {
   format_date: (date) => {
-    return `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
+    return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${
+      new Date(date).getFullYear()
+    }`;
   },
 
   capitalize: (str) => {
