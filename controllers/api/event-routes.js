@@ -10,18 +10,16 @@ const upload = multer({ storage: storage });
 // Create a new event
 router.post('/', upload.single('image'), async (req, res) => {
   const file = req.file;
-
+  // console.log(file.buffer.byteLength)
   const eventBody = { ...req.body };
 
   if (!file) {
     res.status(400).send('No file uploaded');
   } else {
-    console.log(file.buffer)
     sharp(file.buffer)
-      .resize(600)
+      .resize(400)
       .toBuffer()
       .then(async (resizedBuffer) => {
-        console.log(resizedBuffer)
         try {
           const event = await Event.create({
             ...eventBody,
