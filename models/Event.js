@@ -28,7 +28,7 @@ Event.init(
       allowNull: false,
     },
     bufferData: {
-      type: DataTypes.BLOB,
+      type: DataTypes.BLOB('medium'),
     }
   },
   {
