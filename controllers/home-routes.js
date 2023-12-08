@@ -100,22 +100,15 @@ router.get('/dashboard', withAuth, async (req, res) => {
       include: [{ model: User }],
     });
 
-    const events = await Promise.all(
-      eventsData.map(async (el) => {
-        const imageSrc = await sharp(el.bufferData)
-          .resize(600)
-          .toBuffer()
-          .then((resizedBuffer) => {
-            const base64Image = resizedBuffer.toString('base64');
-            return `data:image/jpeg;base64,${base64Image}`;
-          });
+    const events = eventsData.map((el) => {
+      const base64Image = el.bufferData.toString('base64');
+      const imageSrc = `data:image/jpeg;base64,${base64Image}`;
 
-        return {
-          ...el.get({ plain: true }),
-          imageSrc,
-        };
-      })
-    );
+      return {
+        ...el.get({ plain: true }),
+        imageSrc,
+      };
+    });
 
     res.render('dashboard', {
       loggedIn: req.session.currentUser?.loggedIn,
