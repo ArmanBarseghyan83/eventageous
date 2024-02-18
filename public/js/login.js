@@ -14,7 +14,9 @@ const loginFormHandler = async (event) => {
 
     // value of the returnto variable comes from server and set in the login.handlebars
     if (response.ok) {
-      document.location.replace(document.querySelector('#login-header').dataset.returnto || '/');
+      document.location.replace(
+        document.querySelector('#login-header').dataset.returnto || '/'
+      );
     } else {
       alert('Failed to log in.');
     }
@@ -37,12 +39,32 @@ const signupFormHandler = async (event) => {
 
     // value of the returnto variable comes from server and set in the login.handlebars
     if (response.ok) {
-      location.replace(document.querySelector('#login-header').dataset.returnto || '/');
+      location.replace(
+        document.querySelector('#login-header').dataset.returnto || '/'
+      );
     } else {
       alert('Failed to sign up.');
     }
   }
 };
+
+const guestLoginHandler = async () => {
+  const response = await fetch('/api/users/login', {
+    method: 'POST',
+    body: JSON.stringify({ username: 'Arman', password: '12345678' }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (response.ok) {
+    document.location.replace(
+      document.querySelector('#login-header').dataset.returnto || '/'
+    );
+  } else {
+    alert('Failed to log in.');
+  }
+};
+
+document.querySelector('#guest')?.addEventListener('click', guestLoginHandler);
 
 document
   .querySelector('.login-form')
