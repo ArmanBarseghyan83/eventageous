@@ -39,6 +39,7 @@ router.post('/', upload.single('image'), async (req, res) => {
 
 // Update an event by its `id` value
 router.put('/:id', async (req, res) => {
+  console.log(req.body)
   try {
     const event = await Event.update(req.body, {
       where: { id: req.params.id },

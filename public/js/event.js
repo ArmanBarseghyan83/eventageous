@@ -4,12 +4,13 @@ const updateEventHandler = async (e) => {
   const title = document.querySelector('#event-title').value.trim();
   const address = document.querySelector('#event-address').value.trim();
   const description = document.querySelector('#event-description').value.trim();
+  const zipcode = document.querySelector('#event-zipcode').value.trim();
   const id = +location.href.split('/')[location.href.split('/').length - 1];
-  if (title && address && description) {
+  if (title && address && description && zipcode) {
     try {
       const response = await fetch(`/api/events/${id}`, {
         method: 'PUT',
-        body: JSON.stringify({ title, address, description }),
+        body: JSON.stringify({ title, address, description, zipcode }),
         headers: { 'Content-Type': 'application/json' },
       });
 
